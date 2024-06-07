@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+  </head>
+  <body>
+    <form id="login-form">
+      <input type="text" name="email" id="email" />
+      <input type="password" name="password" id="password" />
+      <input type="submit" />
+    </form>
+
+    <button id="get-koders">Listar koders</button>
+
+    <script>
+      const $form = document.getElementById("login-form");
+      const $getKodersButton = document.getElementById("get-koders");
+
+      $getKodersButton.addEventListener("click", (event) => {
+        const token = localStorage.getItem("token");
+
+        fetch("http://localhost:8080/koders", {
+          method: "GET",
+          headers: { Authorization: token },
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log("koders", json.data.koders);
+          })
+          .catch((error) => {
+            console.error("get koders error:", error);
+          });
+      });
+
+      $form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const $email = document.getElementById("email");
+        const $password = document.getElementById("password");
+
+        const email = $email.value;
+        const password = $password.value;
+
+        const loginService = "http://localhost:8080/auth/login";
+
+        fetch(loginService, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            // { error: 'mensaje de error' } = json
+            //  json.error
+            //  json.data // undefined
+            // json.data.token // cannot get property token of undefined
+
+            if (json.data?.token) {
+              localStorage.setItem("token", json.data.token);
+              alert("login success");
+            } else {
+              alert("Invalid Data");
+            }
+          })
+          .catch((error) => {
+            console.error("Login Error:", error);
+          });
+      });
+    </script>
+  </body>
+</html>
