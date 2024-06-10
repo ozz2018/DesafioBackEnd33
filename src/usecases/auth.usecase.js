@@ -1,7 +1,7 @@
 const createError = require("http-errors");
 const Users = require("../models/users.models")
 const jwt = require("../lib/jwt");
-const encrypt = require("../lib/encrypt");
+const encrypt = require("../lib/encrypt")
 
 async function login(email, password) {
     const user = await Users.findOne({ email: email });
