@@ -22,3 +22,30 @@ route.post("/", auth, async (req, res) => {
     });
 }
 });
+
+route.get("/", async (req, res) => {
+    try {
+        const search = req.query.search;
+            if (!search) {
+            const posts = await postsUseCase.getAll();
+            res.json({
+                succes: true,
+                message: "All Posts",
+                data: { posts },
+            });
+            } else {
+                const posts = await postsUseCase.getByTitle(search);
+                res.json({
+                    succes: true,
+                    message: "All posts finded with " + search,
+                    data: { posts },
+                });
+            }
+    } catch (error) {
+        res.status(error.status || 500);
+        res.json({
+            succes: false,
+            error: error.message,
+        });
+    }
+});
