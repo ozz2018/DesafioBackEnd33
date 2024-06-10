@@ -1,5 +1,5 @@
-const express = require("express");
-const authUseCase = require("../usecases/auth.usecase");
+const express = require("express")
+const authUseCase = require("../usecases/auth.usecase")
 
 const router = express.Router();
 router.post("/login", async (req, res) => {
