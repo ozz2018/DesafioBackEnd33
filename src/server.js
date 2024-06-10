@@ -1,8 +1,8 @@
 const cors = require("cors")
 const express = require("express")
-const usersRouter = require("./routers/users.routes")
-const authRouter = require("./routers/auth.routes")
-const postsRouter = require("./routers/posts.routes")
+const usersRouter = require("./routes/users.routes")
+const authRouter = require("./routes/auth.routes")
+const postsRouter = require("./routes/posts.routes")
 
 const app = express()
 
