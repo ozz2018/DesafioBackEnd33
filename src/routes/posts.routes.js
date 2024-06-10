@@ -3,7 +3,6 @@ const postsUseCase = require("../usecases/posts.usecase");
 const auth = require("../middlewares/auth.middleware");
 const jwt = require("../lib/jwt");
 
-
 const route = express.Router();
 
 route.post("/", auth, async (req, res) => {
@@ -15,7 +14,7 @@ route.post("/", auth, async (req, res) => {
             data: { post: posts },
         });
     } catch (error) {
-        res.status(error.status || 500);
+        res.status(error.status || 500)
         res.json({
             succes: false,
             error: error.message,
@@ -42,7 +41,7 @@ route.get("/", async (req, res) => {
                 });
             }
     } catch (error) {
-        res.status(error.status || 500);
+        res.status(error.status || 500)
         res.json({
             succes: false,
             error: error.message,
@@ -52,8 +51,8 @@ route.get("/", async (req, res) => {
 
 route.patch("/:id", auth, async (req, res) => {
     try {
-        const { id } = req.params;
-        const postUpdate = await postsUseCase.updateById(id, req.body);
+        const { id } = req.params
+        const postUpdate = await postsUseCase.updateById(id, req.body)
         res.json({
             succes: true,
             data: { post: postUpdate },
@@ -84,11 +83,11 @@ route.delete("/:id", auth, async (req, res) => {
         data: { post: postDeleted },
         });
     } catch (error) {
-        res.status(error.status || 500);
+        res.status(error.status || 500)
             res.json({
                 succes: false,
                 error: error.message,
-            });
+            })
     }
-});
-module.exports = route;
+})
+module.exports = route
