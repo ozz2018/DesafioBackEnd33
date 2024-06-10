@@ -46,4 +46,4 @@ module.exports = {
     getByTitle,
     deleteById,
     updateById,
-};
+}
