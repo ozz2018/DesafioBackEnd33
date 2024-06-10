@@ -9,3 +9,11 @@ async function create(userData) {
     const newUser = await Users.create(userData);
     return newUser;
 }
+async function getById(id) {
+    const user = await Users.findById(id);
+    return user;
+} 
+module.exports = {
+    create,
+    getById,
+};
