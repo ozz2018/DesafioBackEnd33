@@ -9,9 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/user", usersRouter);
-app.use("/auth", authRouter);
-app.use("/post", postsRouter);
+app.use("/user", usersRouter)
+app.use("/auth", authRouter)
+app.use("/post", postsRouter)
 
 app.get("/", (req, res) => {
   res.json({
