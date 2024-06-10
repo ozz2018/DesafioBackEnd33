@@ -31,3 +31,23 @@ async function getByTitle(title) {
     const postDeleted = await Posts.findByIdAndDelete(idPost);
     return postDeleted;
   }
+  
+async function updateById(id, newPostData) {
+    const originalUser = await Posts.findById(id);
+    newPostData.user = originalUser.user;
+    newPostData.updated_at = new Date();
+    const updatedPost = await Posts.findByIdAndUpdate(id, newPostData, {
+      new: true,
+    });
+    return updatedPost;
+  }
+  
+  module.exports = {
+    create,
+    getAll,
+    getById,
+    getByTitle,
+    deleteById,
+    updateById,
+  };
+  
