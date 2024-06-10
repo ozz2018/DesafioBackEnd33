@@ -1,5 +1,5 @@
-const cors = require("cors");
-const express = require("express");
+const cors = require("cors")
+const express = require("express")
 const usersRouter = require("./routers/users.routes")
 const authRouter = require("./routers/auth.routes")
 const postsRouter = require("./routers/posts.routes")
