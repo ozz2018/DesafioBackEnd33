@@ -1,20 +1,18 @@
 const mongoose = require("mongoose");
-
 const modelName = "user";
-
 const schema = new mongoose.Schema({
-  name: {
+    name: {
     type: String,
     required: true,
     minLength: 2,
     maxLength: 100,
-  },
-  profilePic: {
+    },
+    profilePic: {
     type: String,
     required: false,
     minLength: 10,
     maxLength: 500,
-  },
+    },
     email: {
     type: String,
     required: true,
