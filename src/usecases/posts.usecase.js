@@ -12,7 +12,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-    const post = await Posts.findById(id);
+    const post = await Posts.findById(id)
     return post;
 }
 
