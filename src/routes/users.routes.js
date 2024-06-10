@@ -3,7 +3,7 @@ const usersUseCase = require("../usecases/users.usecase");
 
 const route = express.Router();
 
-}route.post("/", async (req, res) => {
+route.post("/", async (req, res) => {
     try {
         const user = await usersUseCase.create(req.body);
         res.json({
