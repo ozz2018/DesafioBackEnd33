@@ -20,20 +20,18 @@ route.post("/", async (req, res) => {
 });
 route.get("/:id", async (req, res) => {
     try {
-      const { id } = req.params;
-      const user = await usersUseCase.getById(id);
-  
-      res.json({
+        const { id } = req.params;
+        const user = await usersUseCase.getById(id);
+        res.json({
         succes: true,
         data: { user },
-      });
+        });
     } catch (error) {
-      res.status(error.status || 500);
-      res.json({
+        res.status(error.status || 500);
+        res.json({
         succes: false,
         error: error.message,
-      });
+        });
     }
 });
-
 module.exports = route;
