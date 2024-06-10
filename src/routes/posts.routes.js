@@ -49,3 +49,20 @@ route.get("/", async (req, res) => {
         });
     }
 });
+
+route.patch("/:id", auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const postUpdate = await postsUseCase.updateById(id, req.body);
+        res.json({
+            succes: true,
+            data: { post: postUpdate },
+        });
+    } catch (error) {
+        res.status(error.status || 500);
+        res.json({
+            succes: false,
+            error: error.message,
+        });
+    }
+});
