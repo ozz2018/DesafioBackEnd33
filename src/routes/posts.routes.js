@@ -66,3 +66,29 @@ route.patch("/:id", auth, async (req, res) => {
         });
     }
 });
+
+route.delete("/:id", auth, async (req, res) => {
+    try {
+        const payload = jwt.verify(req.headers.authorization);
+        const idUserActive = await payload.id;
+        const { id } = req.params;
+        const post = await postsUseCase.getById(id);
+        const idUserPost = post.user;
+        const postDeleted = await postsUseCase.deleteById(
+            id,
+            idUserPost,
+            idUserActive
+            );
+        res.json({
+        succes: true,
+        data: { post: postDeleted },
+        });
+    } catch (error) {
+        res.status(error.status || 500);
+            res.json({
+                succes: false,
+                error: error.message,
+            });
+    }
+});
+module.exports = route;
