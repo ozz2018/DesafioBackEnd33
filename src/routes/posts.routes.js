@@ -58,7 +58,7 @@ route.patch("/:id", auth, async (req, res) => {
             data: { post: postUpdate },
         });
     } catch (error) {
-        res.status(error.status || 500);
+        res.status(error.status || 500)
         res.json({
             succes: false,
             error: error.message,
