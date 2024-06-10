@@ -1,14 +1,14 @@
-const createError = require("http-errors");
-const Posts = require("../models/posts.models");
+const createError = require("http-errors")
+const Posts = require("../models/posts.models")
 
 async function create(postData) {
-    const newPost = await Posts.create(postData);
+    const newPost = await Posts.create(postData)
     return newPost;
 }
 
 async function getAll() {
     const allPosts = await Posts.find().populate("user");
-    return allPosts;
+    return allPosts
 }
 
 async function getById(id) {
@@ -20,8 +20,8 @@ async function getByTitle(title) {
     //Utiliza una expresión regular ($regex) para la búsqueda,
     //con la opción i para hacerla insensible a mayúsculas.
     const query = { title: { $regex: title, $options: "i" } };
-    const getByTitle = await Posts.find(query).populate("user");
-    return getByTitle;
+    const getByTitle = await Posts.find(query).populate("user")
+    return getByTitle
 }
 
 async function deleteById(idPost, idUserPost, idUserActive) {
