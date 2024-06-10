@@ -3,28 +3,28 @@ const mongoose = require("mongoose");
 const modelName = "posts";
 
 const schema = new mongoose.Schema({
-  title: {
+    title: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 100,
-  },
-  image: {
+    },
+    image: {
     type: String,
     required: false,
     minLength: 10,
     maxLength: 500,
-  },
-  body: {
+    },
+    body: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 1000,
-  },
-  user: {
+    },
+    user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
-  },
+    },
     created_at: {
     type: Date,
     default: Date.now,
