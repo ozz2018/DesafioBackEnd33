@@ -17,16 +17,15 @@ async function getById(id) {
 }
 
 async function getByTitle(title) {
-    //Utiliza una expresión regular ($regex) para la búsqueda,
-    //con la opción i para hacerla insensible a mayúsculas.
-    const query = { title: { $regex: title, $options: "i" } };
+    //Use ($regex) para la búsqueda, op i para poder  mayúsculas.
+    const query = { title: { $regex: title, $options: "i" } }
     const getByTitle = await Posts.find(query).populate("user")
     return getByTitle
 }
 
 async function deleteById(idPost, idUserPost, idUserActive) {
     if (idUserPost != idUserActive)
-        throw createError(403, "The user isn't the creator of the post");
+        throw createError(403, "The user isn't the creator of the post")
     const postDeleted = await Posts.findByIdAndDelete(idPost);
     return postDeleted;
 }
