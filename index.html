@@ -21,16 +21,16 @@
       $getKodersButton.addEventListener("click", (event) => {
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8080/koders", {
+        fetch("http://localhost:8080/user", {
           method: "GET",
           headers: { Authorization: token },
         })
           .then((response) => response.json())
           .then((json) => {
-            console.log("koders", json.data.koders);
+            console.log("user", json.data.koders);
           })
           .catch((error) => {
-            console.error("get koders error:", error);
+            console.error("get user error:", error);
           });
       });
 
