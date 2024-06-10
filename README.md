@@ -1,11 +1,11 @@
 # API Backend Desafío
 ## Tutorial:
 1ro necesitas tu archivo **.env** con las variables del archivo **example.env**.
-Hecho lo anterior luego de instalar las dependencias:
+Hecho lo anterior instalar dependencias con:
 ~~~
 npm i
 ~~~
-Podrás probar la API con tu **Thunder Client** corriendo primero el servidor con el siguiente comando en tu terminal:
+Para probar la API con tu **Postman** corriendo primero el servidor el comando en tu terminal:
 ~~~
 npm run dev
 ~~~
