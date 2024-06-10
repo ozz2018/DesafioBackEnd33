@@ -18,5 +18,4 @@ app.get("/", (req, res) => {
     message: "Desafío Backend APIv1",
   });
 });
-
 module.exports = app
