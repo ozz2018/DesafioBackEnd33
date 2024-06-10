@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-
 const modelName = "posts";
-
 const schema = new mongoose.Schema({
     title: {
     type: String,
