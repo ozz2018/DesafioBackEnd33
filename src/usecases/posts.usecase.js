@@ -22,32 +22,29 @@ async function getByTitle(title) {
     const query = { title: { $regex: title, $options: "i" } };
     const getByTitle = await Posts.find(query).populate("user");
     return getByTitle;
-  }
-  
-  async function deleteById(idPost, idUserPost, idUserActive) {
+}
+
+async function deleteById(idPost, idUserPost, idUserActive) {
     if (idUserPost != idUserActive)
-      throw createError(403, "The user isn't the creator of the post");
-  
+        throw createError(403, "The user isn't the creator of the post");
     const postDeleted = await Posts.findByIdAndDelete(idPost);
     return postDeleted;
-  }
-  
+}
+
 async function updateById(id, newPostData) {
     const originalUser = await Posts.findById(id);
     newPostData.user = originalUser.user;
     newPostData.updated_at = new Date();
     const updatedPost = await Posts.findByIdAndUpdate(id, newPostData, {
-      new: true,
+    new: true,
     });
-    return updatedPost;
-  }
-  
-  module.exports = {
+return updatedPost;
+}
+module.exports = {
     create,
     getAll,
     getById,
     getByTitle,
     deleteById,
     updateById,
-  };
-  
+};
