@@ -15,6 +15,6 @@ const route = express.Router();
         res.json({
         succes: false,
         error: error.message,
-      });
+    });
     }
-  });
+});
