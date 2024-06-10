@@ -6,7 +6,7 @@ function sign(payload) {
 }
 
 function verify(token) {
-    return jsonwebtoken.verify(token, JWT_SECRET);
+    return jsonwebtoken.verify(token, JWT_SECRET)
 }
 
 module.exports = {
