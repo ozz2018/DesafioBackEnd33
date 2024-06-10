@@ -1,6 +1,6 @@
 # API Backend Desafío
 ## Tutorial:
-Primero es necesario crear tu archivo **.env** basandote en las variables que encontrarás en el archivo **example.env**.
+1ro necesitas tu archivo **.env** con las variables del archivo **example.env**.
 Hecho lo anterior luego de instalar las dependencias:
 ~~~
 npm i
