@@ -1,93 +1,111 @@
-const express = require("express");
-const postsUseCase = require("../usecases/posts.usecase");
-const auth = require("../middlewares/auth.middleware");
-const jwt = require("../lib/jwt");
+const useCasePost = require('../usecases/posts.usecase')
+const auth = require('../middlewares/auth.middleware')
+const express = require('express')
+const router = express.Router()
 
-const route = express.Router();
-
-route.post("/", auth, async (req, res) => {
-    try {
-        req.body.user = req.user.id;
-        const posts = await postsUseCase.create(req.body);
-        res.json({
-            succes: true,
-            data: { post: posts },
-        });
-    } catch (error) {
-        res.status(error.status || 500)
-        res.json({
-            succes: false,
-            error: error.message,
-    });
-}
-});
-
-route.get("/", async (req, res) => {
-    try {
-        const search = req.query.search;
-            if (!search) {
-            const posts = await postsUseCase.getAll();
-            res.json({
-                succes: true,
-                message: "All Posts",
-                data: { posts },
-            });
-            } else {
-                const posts = await postsUseCase.getByTitle(search);
-                res.json({
-                    succes: true,
-                    message: "All posts finded with " + search,
-                    data: { posts },
-                });
-            }
-    } catch (error) {
-        res.status(error.status || 500)
-        res.json({
-            succes: false,
-            error: error.message,
-        });
-    }
-});
-
-route.patch("/:id", auth, async (req, res) => {
-    try {
-        const { id } = req.params
-        const postUpdate = await postsUseCase.updateById(id, req.body)
-        res.json({
-            succes: true,
-            data: { post: postUpdate },
-        });
-    } catch (error) {
-        res.status(error.status || 500)
-        res.json({
-            succes: false,
-            error: error.message,
-        });
-    }
-});
-
-route.delete("/:id", auth, async (req, res) => {
-    try {
-        const payload = jwt.verify(req.headers.authorization);
-        const idUserActive = await payload.id;
-        const { id } = req.params;
-        const post = await postsUseCase.getById(id);
-        const idUserPost = post.user;
-        const postDeleted = await postsUseCase.deleteById(
-            id,
-            idUserPost,
-            idUserActive
-            );
-        res.json({
-        succes: true,
-        data: { post: postDeleted },
-        });
-    } catch (error) {
-        res.status(error.status || 500)
-            res.json({
-                succes: false,
-                error: error.message,
-            })
-    }
+router.post('/', auth, async (req, res) => {
+  try {
+    const post = req.body
+    const newPost = useCasePost.create(post)
+    res.json({
+      succes: true,
+      message: 'Post created',
+      data: {
+        newPost
+      }
+    })
+  } catch (error) {
+    res.status(error.status || 500)
+    res.json({
+      success: false,
+      message: 'Error at create post',
+      error: error.message
+    })
+  }
 })
-module.exports = route
+
+router.get('/', async (req, res) => {
+  try {
+    const posts = await useCasePost.getAll()
+    res.json({
+      success: true,
+      message: 'All posts',
+      data: {
+        posts
+      }
+    })
+  } catch (error) {
+    res.status(error.status || 500)
+    res.json({
+      success: false,
+      message: 'Error at get all posts',
+      error: error.message
+    })
+  }
+})
+
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const post = await useCasePost.getById(id)
+    res.json({
+      success: true,
+      message: 'Post found',
+      data: {
+        post
+      }
+    })
+  } catch (error) {
+    res.status(error.status || 500)
+    res.json({
+      success: false,
+      message: 'Error at get post',
+      error: error.message
+    })
+  }
+})
+
+router.patch('/:id', auth, async (req, res) => {
+  try {
+    const { id } = req.params
+    const post = req.body
+    const updatesPost = await useCasePost.updateById(id, post)
+    res.json({
+      success: true,
+      message: 'Post updated',
+      data: {
+        updatesPost
+      }
+    })
+  } catch (error) {
+    res.status(error.status || 500)
+    res.json({
+      success: false,
+      message: 'Error at update post',
+      error: error.message
+    })
+  }
+})
+
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const { id } = req.params
+    const deletePost = await useCasePost.deleteById(id)
+    res.json({
+      success: true,
+      message: 'Post deleted',
+      data: {
+        deletePost
+      }
+    })
+  } catch (error) {
+    res.status(error.status || 500)
+    res.json({
+      success: false,
+      message: 'Error at delete post',
+      error: error.message
+    })
+  }
+})
+
+module.exports = router

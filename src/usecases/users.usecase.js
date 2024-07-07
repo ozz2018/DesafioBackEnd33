@@ -13,7 +13,13 @@ async function getById(id) {
     const user = await Users.findById(id)
     return user;
 } 
+
+async function getAll() {
+    const users = await Users.find()
+    return users
+  }
 module.exports = {
     create,
     getById,
+    getAll,
 }
